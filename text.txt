@@ -1,0 +1,62 @@
+Project Description:
+
+Our project will be used to send bulk messages to users in a specific segment. You can start from the stage where the message content and contact information list of message recipients are already present in the DB. You are expected to create a Job structure that will send the message content in the DB as messages to the contact information also stored in the DB.
+
+This job structure should be designed to send 2 messages every 5 seconds. After a message is sent, the sent status should be marked in the database.
+
+The sending process will return a message ID. During message listing, these IDs are expected to be returned as a JSON response.
+
+Requirements:
+
+●	Message content, recipient phone number, and sending status information must be retrieved from the database for each record. Character limit control is required for message content.
+●	After the project is deployed, automatic message sending should begin for all unsent records in the database. You can do this with crontab, but it's not mandatory. Instead, it's sufficient to develop it so that the command to be run with php artisan is manually triggered and queue:work is also manually triggered.
+●	Messages that have been marked as sent should not be sent again. Newly added records should be sent in the next automatic process.
+●	(Bonus Item) - After sending a message, the messageId value and sending time received in the response should be cached in Redis.
+
+Additional Details:
+
+●	The project must be developed using Laravel 11+ and PHP 8+
+●	Laravel Repository Pattern must be used
+●	Service Layer implementation must be done
+●	Queue, Job/Worker structures must be used
+●	Laravel Command structure must be used (for message sending)
+●	Redis cache implementation must be done
+●	Must comply with RESTful API standards
+
+Required APIs and Commands:
+
+●	Message reading and sending Job triggered via php artisan (Job should be sent to laravel queue so it can be run with queue:work)
+●	An API End-point that retrieves the list of sent messages
+
+
+Webhook Integration:
+An example webhook.site has been provided for tracking sent requests. Example webhook.site (If the link is inactive, you can create your own or request support)
+
+Technical Expectations:
+
+●	Laravel 10.x must be used
+●	Swagger/OpenAPI must be used for API documentation
+●	README.md file must be included for installation or configuration (e.g., docker commands)
+●	Code must be hosted on GitHub
+●	Unit and Integration tests must be written
+●	Database migrations must be included
+●	Laravel Queue structure implementation must be done
+
+
+
+Evaluation Criteria:
+
+●	Architecture / Design patterns / OOP approach
+●	Code quality / Readability / Consistency / Clean code
+●	Database/table designs / (Bonus) Redis usage
+●	Compliance with Laravel best practices
+●	Service-Repository pattern implementation
+●	Proper usage of Queue and Job structures
+●	Application must work as expected
+
+
+Curl Example of Request to be Sent from Your Laravel Project:
+
+●	Use your own webhook.site URL
+●	Arrange the response returned from webhook.site as shown in the SS below. This way, you can mark the message as sent on the project side according to the returned response.
+
